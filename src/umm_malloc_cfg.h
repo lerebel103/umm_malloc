@@ -208,8 +208,8 @@
  */
 
 #ifdef UMM_POISON_CHECK
-   #define UMM_POISON_SIZE_BEFORE (4)
-   #define UMM_POISON_SIZE_AFTER (4)
+   #define UMM_POISON_SIZE_BEFORE (6)
+   #define UMM_POISON_SIZE_AFTER (6)
    #define UMM_POISONED_BLOCK_LEN_TYPE uint16_t
 
    extern void *umm_poison_malloc( size_t size );

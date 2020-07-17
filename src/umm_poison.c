@@ -112,10 +112,10 @@ static void *get_poisoned( void *ptr, size_t size_w_poison ) {
     *(UMM_POISONED_BLOCK_LEN_TYPE *)ptr = (UMM_POISONED_BLOCK_LEN_TYPE)size_w_poison;
 
     /* Return pointer at the first non-poisoned byte */
-    return ptr + sizeof(UMM_POISONED_BLOCK_LEN_TYPE) + UMM_POISON_SIZE_BEFORE;
-  } else {
-    return ptr;
+    ptr += (sizeof(UMM_POISONED_BLOCK_LEN_TYPE) + UMM_POISON_SIZE_BEFORE);
   }
+
+  return ptr;
 }
 
 /*

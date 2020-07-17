@@ -42,7 +42,7 @@ bool umm_integrity_check(void) {
 
     /* Check that next free block number is valid */
     if (cur >= UMM_NUMBLOCKS) {
-      printf("heap integrity broken: too large next free num: %d "
+      DBGLOG_FUNCTION("heap integrity broken: too large next free num: %d "
           "(in block %d, addr 0x%08x)\n", cur, prev,
           DBGLOG_32_BIT_PTR(&UMM_NBLOCK(prev)));
       ok = false;
@@ -55,7 +55,7 @@ bool umm_integrity_check(void) {
 
     /* Check if prev free block number matches */
     if (UMM_PFREE(cur) != prev) {
-      printf("heap integrity broken: free links don't match: "
+      DBGLOG_FUNCTION("heap integrity broken: free links don't match: "
           "%d -> %d, but %d -> %d\n",
           prev, cur, cur, UMM_PFREE(cur));
       ok = false;
@@ -74,7 +74,7 @@ bool umm_integrity_check(void) {
 
     /* Check that next block number is valid */
     if (cur >= UMM_NUMBLOCKS) {
-      printf("heap integrity broken: too large next block num: %d "
+      DBGLOG_FUNCTION("heap integrity broken: too large next block num: %d "
           "(in block %d, addr 0x%08x)\n", cur, prev,
           DBGLOG_32_BIT_PTR(&UMM_NBLOCK(prev)));
       ok = false;
@@ -89,7 +89,7 @@ bool umm_integrity_check(void) {
     if ((UMM_NBLOCK(cur) & UMM_FREELIST_MASK)
         != (UMM_PBLOCK(cur) & UMM_FREELIST_MASK))
     {
-      printf("heap integrity broken: mask wrong at addr 0x%08x: n=0x%x, p=0x%x\n",
+      DBGLOG_FUNCTION("heap integrity broken: mask wrong at addr 0x%08x: n=0x%x, p=0x%x\n",
           DBGLOG_32_BIT_PTR(&UMM_NBLOCK(cur)),
           (UMM_NBLOCK(cur) & UMM_FREELIST_MASK),
           (UMM_PBLOCK(cur) & UMM_FREELIST_MASK));
@@ -99,7 +99,7 @@ bool umm_integrity_check(void) {
 
     /* make sure the block list is sequential */
     if (cur <= prev ) {
-     printf("heap integrity broken: next block %d is before prev this one "
+     DBGLOG_FUNCTION("heap integrity broken: next block %d is before prev this one "
           "(in block %d, addr 0x%08x)\n", cur, prev,
           DBGLOG_32_BIT_PTR(&UMM_NBLOCK(prev)));
       ok = false;
@@ -111,7 +111,7 @@ bool umm_integrity_check(void) {
 
     /* Check if prev block number matches */
     if (UMM_PBLOCK(cur) != prev) {
-      printf("heap integrity broken: block links don't match: "
+      DBGLOG_FUNCTION("heap integrity broken: block links don't match: "
           "%d -> %d, but %d -> %d\n",
           prev, cur, cur, UMM_PBLOCK(cur));
       ok = false;
